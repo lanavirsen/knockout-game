@@ -1,0 +1,281 @@
+/* Reset margin and padding for all elements, and apply border-box sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;  /* Applies the Google Font 'Inter' (linked in the <head>) */
+}
+
+html { font-size: 20px; }  /* Sets base font size: 1rem = 20px */
+
+/* Using width: 100vw on body can cause a slight horizontal scroll.
+     Using 100% instead avoids that issue. */
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+/* Utility class for toggling element visibility */
+.hidden { display: none; }
+
+
+/* ========== FLEX LAYOUT UTILITIES ========== */
+
+/* Layout and visibility are separated in HTML:
+    - Layout is applied via classes
+    - Visibility is controlled via IDs */
+
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+
+.gap-1 { gap: 1rem; }
+
+
+body {
+    background-color: rgb(243, 242, 242);
+    user-select: none;  /* Prevents the user from selecting text or icons */
+}
+
+main {
+    width: 500px;
+    height: 700px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+}
+
+h1 {
+    font-weight: 900;
+    margin: 1.5rem 0 1rem 0;
+}
+
+p { font-size: 1.15rem; }
+
+
+/* ========== KNOCKOUT NUMBER SELECT ========== */
+
+/* Container that holds both the select input and the confirmation text */
+.knockout-select-wrapper {
+    height: 2rem;
+    font-size: 1rem;
+}
+
+/* Style for the <select> dropdown */
+select {
+    padding: 0.2rem 0.4rem;
+    font-size: 1.1rem;
+    border: 2px solid #e6e6e6;
+    border-radius: 4px;
+    background-color: white;
+    transition: background-color 0.2s ease;
+}
+
+select:hover { background-color: #f2f2f2; }
+select:focus { outline: none; }
+
+/* Ensures paragraph inside .knockout-select-wrapper inherits its font size */
+.knockout-select-wrapper p { font-size: inherit; }
+
+#confirmed-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+/* ========== DICE STYLING & ANIMATION ========== */
+
+#dice-container {
+    margin-bottom: 0.5rem;
+    position: relative;  /* Positioned relatively so overlays can be absolutely positioned inside */
+}
+
+/* Subtle rocking animation used when dice are idle */
+@keyframes idle-dice {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+/* Shake animation for dice roll */
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(50deg); }
+    40% { transform: rotate(-50deg); }
+    60% { transform: rotate(40deg); }
+    80% { transform: rotate(-40deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Dice symbol styling */
+.dice {
+    display: inline-block;
+    font-size: 8rem;
+    line-height: 1;  /* Removes vertical padding above and below the symbol */
+    margin: 0 5px;
+    transition: transform 0.2s ease;
+    animation: none;   /* Prevents animation by default */
+}
+
+.dice.idle { animation: idle-dice 4s linear infinite; }
+
+.shake { animation: shake 0.5s; }
+
+
+/* ========== OVERLAY MESSAGES ========== */
+
+/* Overlay containers that cover the dice area.
+    Used to display knockout or victory messages.
+    Positioned absolutely within #dice-container. */
+
+.knockout-container,
+.victory-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.knockout-text,
+.victory-text {
+    font-size: 2rem;
+    font-weight: bold;
+    transform: skewX(-15deg);
+    padding: 0.3rem 1rem;
+    display: inline-block;
+}
+
+.knockout-text { background: rgba(218, 0, 29, 0.7); }
+.victory-text { background: rgba(0, 218, 127, 0.7); }
+
+.knockout-text span,
+.victory-text span {
+    color: white;
+    opacity: 1;
+}
+
+
+/* ========== ROLL SUM DISPLAY ========== */
+
+/* Container for the "You rolled X + Y = Z" line.
+    Height is reserved even when it's hidden, to reduce layout shift. */
+
+#sum-roll-container { height: 1.4rem; }
+
+
+/* ========== SCORE DISPLAY ========== */
+
+/* Wrapper for score and goal info */
+#score-container {
+    width: 13rem;
+    margin-top: 1rem;
+}
+
+/* Container for the "Score" and "Goal" block */
+.score-goal-block {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 0;
+}
+
+.score-row-labels,
+.score-row-values {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.score-row-labels p,
+.score-row-values p {
+    width: 50%; /* Each cell takes up 50% width */
+    text-align: center;
+}
+
+.score-row-values p {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+#safe-roll-status {
+    text-align: center;
+    width: 100%;
+    margin: 0.6rem 0 0.4rem 0;
+}
+
+/* Faded appearance for score block before the game begins */
+.placeholder { opacity: 0.1; }
+
+/* Slightly faded heart icon to indicate it has been used */
+.used-heart { opacity: 0.8; }
+
+
+/* ========== BUTTONS ========== */
+
+/* Base styling for all buttons */
+button {
+    width: 7rem;
+    height: 2.4rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 0 solid #cacaca;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+button:hover { background-color: #e6e6e6; }
+
+button:active {
+    background-color: #444;
+    border: 2px solid #636262;
+    color: white;
+    transform: scale(1);
+}
+
+/* Overall button section size (sets layout boundaries) */
+.buttons-container {
+    width: 15rem;
+    height: 8rem;
+    transform: translateY(0);  /* Forces a repaint to prevent occasional subpixel rendering glitches (e.g. thin ghost lines) */
+}
+
+#buttons-roll-reset { margin: 0.5rem; }
+
+/* Idle animation for the Start Game button to draw attention */
+@keyframes idlePulse {
+    0%, 100% { background-color: #f0f0f0; }
+    50% { background-color: #dcdcdc; }
+}
+
+#start-game-btn { animation: idlePulse 3s ease-in-out infinite; }
+
+#start-game-btn:hover {
+    animation: none;  /* Pause idle animation on hover */
+    background-color: #e6e6e6;
+    transform: scale(1.05);
+}
+
+#start-game-btn:active {
+    background-color: #444;
+    border: 2px solid #636262;
+    color: white;
+    transform: scale(1);
+}
+
+/* Center-align text blocks */
+#use-safe-roll,
+#game-over,
+#player-wins { text-align: center; }
+
+/* Consistent spacing and text styling inside those blocks */
+#use-safe-roll p,
+#game-over p,
+#player-wins p {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0.5rem 0 1rem 0;
+}
