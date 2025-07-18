@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple browser-based dice game called Knockout.">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Import Inter font (weights 400, 700, 900) from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Knockout</title>
+</head>
+
+<body class="flex justify-center align-center">
+    <main class="flex flex-column align-center">
+        <h1>Knockout</h1>
+
+        <!-- ========== KNOCKOUT NUMBER CHOICE SECTION ========== -->
+        <!-- Outer container that reserves space -->
+        <div class="knockout-select-wrapper">
+
+            <!-- Separate flex layout from visibility toggles to avoid layout issues -->
+            <div id="knockout-select-container" class="">
+                <div class="flex justify-center align-center gap-1">
+                    <label for="knockout-select">Choose your knockout number: </label>
+                    <select id="knockout-select">
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </div>
+            </div>
+            <div id="knockout-confirmation" class="hidden">
+                <p>Your knockout number: <span id="confirmed-number"></span></p>
+            </div>
+        </div>
+
+        <!-- ========== DICE SECTION ========== -->
+        <div id="dice-container">
+            <span class="dice" id="dice1">⚄</span>
+            <span class="dice" id="dice2">⚄</span>
+
+            <!-- Overlay that appears on top of the dice in the knockout scenario -->
+            <div id="knockout-overlay" class="hidden">
+                <div class="knockout-container flex justify-center align-center">
+                    <div class="knockout-text">
+                        <span>Knockout!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overlay for the victory scenario -->
+            <div id="victory-overlay" class="hidden">
+                <div class="victory-container flex justify-center align-center">
+                    <div class="victory-text">
+                        <span>Victory!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ROLL SUM SECTION ========== -->
+        <div id="sum-roll-container">
+            <p id="current-sum" class="hidden">You rolled <span id="dice1-score">5</span>
+                + <span id="dice2-score">4</span> = <span id="dice-sum">9</span></p>
+        </div>
+
+        <!-- ========== STATS SECTION ========== -->
+        <!-- Placeholder style used before game starts -->
+        <div id="score-container" class="placeholder">
+            <div class="flex flex-column justify-center align-center">
+                <div class="score-goal-block">
+                    <div class="score-row-labels">
+                        <p>Score</p>
+                        <p>Goal</p>
+                    </div>
+                    <div class="score-row-values">
+                        <p><span id="score">--</span></p>
+                        <p><span id="goal">45</span></p>
+                    </div>
+                </div>
+                <p id="safe-roll-status">Safe-Roll: <span id="extra-life">❤️</span></p>
+            </div>
+        </div>
+
+        <!-- ========== BUTTONS AND MESSAGES SECTION ========== -->
+        <div class="buttons-container flex flex-column justify-center align-center">
+
+            <!-- Start Game button -->
+            <div id="start-game" class="">
+                <button id="start-game-btn">Start Game</button>
+            </div>
+
+            <!-- Roll & Reset buttons -->
+            <div id="buttons-roll-reset" class="hidden">
+                <div class="flex gap-1">
+                    <button id="roll-btn">Roll Dice</button>
+                    <button id="reset-btn1">Reset Game</button>
+                </div>
+            </div>
+
+            <!-- Use Safe-Roll message -->
+            <div id="use-safe-roll" class="hidden">
+                <p>You hit your knockout number!<br>Use your Safe-Roll?</p>
+                <div class="flex gap-1">
+                    <button id="safe-roll-btn">Use Safe-Roll</button>
+                    <button id="reset-btn2">Start Over</button>
+                </div>
+            </div>
+
+            <!-- Game Over message -->
+            <div id="game-over" class="hidden">
+                <p>No Safe-Roll left.<br>Game Over!</p>
+                <button id="reset-btn3">Play Again</button>
+            </div>
+
+            <!-- Victory message -->
+            <div id="player-wins" class="hidden">
+                <p>Victory!<br>You hit the target!</p>
+                <div class="flex gap-1">
+                    <button id="keep-going-btn">Keep Going</button>
+                    <button id="reset-btn4">Start Over</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
