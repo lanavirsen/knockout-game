@@ -3,7 +3,7 @@ A simple single-player dice game made as a study project.
 
 [![Live demo](https://img.shields.io/badge/Live_demo-Open_in_browser-blue)](https://lanavirsen.github.io/knockout-game/)
 
-[![Knockout gaem - screenshot](https://github.com/lanavirsen/knockout-game/blob/main/docs/screenshot1.png)](https://lanavirsen.github.io/knockout-game/)
+[![Knockout game - screenshot](https://github.com/lanavirsen/knockout-game/blob/main/docs/screenshot1.png)](https://lanavirsen.github.io/knockout-game/)
 
 
 ## Rules
